@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroClima 3D - Buscador Agrometeorológico</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Objetos 3D de fundo (Verde, Amarelo e Azul) -->
+    <div class="orb-3d orb-verde"></div>
+    <div class="orb-3d orb-amarelo"></div>
+    <div class="orb-3d orb-azul"></div>
+
+    <!-- Interface Modal Principal -->
+    <main class="modal-container">
+        
+        <header class="modal-header">
+            <div class="header-icon">
+                <i class="fa-solid fa-cloud-sun-rain"></i>
+            </div>
+            <div>
+                <h1>AgroClima IA</h1>
+                <p>Busca e Meteorologia Agrícola via DuckDuckGo</p>
+            </div>
+        </header>
+
+        <!-- Formulário de Pergunta / Busca -->
+        <section class="search-section">
+            <div class="input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="campoPergunta" placeholder="Ex: Clima Paraná soja, geada no Sul, seca Matopiba..." onkeydown="tratarEnter(event)">
+                <button id="btnBuscar" onclick="buscarNoDuckDuckGo()">
+                    <span>Buscar</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Sugestões Rápida -->
+        <section class="chips-section">
+            <span class="chips-title">Consultas Rápidas:</span>
+            <div class="chips-list">
+                <button class="chip" onclick="definirPergunta('chuva excessiva plantio soja brasil')">🌧️ Chuvas e Plantio da Soja</button>
+                <button class="chip" onclick="definirPergunta('previsao geada agricultura sul brasil')">❄️ Alerta de Geada no Sul</button>
+                <button class="chip" onclick="definirPergunta('impactos el nino safra agricola brasil')">🌾 Impacto El Niño na Safra</button>
+            </div>
+        </section>
+
+        <!-- Card da Resposta e Leitor de Voz -->
+        <section class="resposta-box" id="respostaBox">
+            <div class="resposta-header">
+                <h3><i class="fa-solid fa-square-rss"></i> Notícias e Resposta Encontrada</h3>
+                <button id="btnVoz" class="btn-audio" onclick="alternarLeituraVoz()">
+                    <i class="fa-solid fa-volume-high"></i> Ouvir Resposta
+                </button>
+            </div>
+
+            <!-- Indicador de Carregamento / Status -->
+            <div id="statusBusca" class="status-msg" style="display: none;">
+                <i class="fa-solid fa-spinner fa-spin"></i> Pesquisando informações no DuckDuckGo...
+            </div>
+
+            <!-- Texto Principal da Resposta -->
+            <div id="respostaTexto" class="resposta-conteudo">
+                Digite sua dúvida sobre o clima no campo ou selecione uma consulta acima. A busca traz informações sobre precipitação, temperatura e notícias da agricultura em tempo real.
+            </div>
+
+            <!-- Notícia e Link de Origem Encontrado na Busca -->
+            <div id="cardNoticia" class="noticia-card" style="display: none;">
+                <div class="noticia-detalhes">
+                    <span class="tag-noticia"><i class="fa-solid fa-newspaper"></i> Resultado da Pesquisa</span>
+                    <h4 id="noticiaTitulo">Título da Notícia</h4>
+                    <p id="noticiaTrecho">Trecho extraído...</p>
+                </div>
+                <a id="noticiaLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-fonte">
+                    Abrir Notícia <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
